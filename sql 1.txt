@@ -1,0 +1,230 @@
+Microsoft Windows [Version 10.0.22621.1265]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Mayank>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+mysql> create database mayank;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mayank             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> mayank
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mayank' at line 1
+mysql> open mayank;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'open mayank' at line 1
+mysql> cls
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cls' at line 1
+mysql> clear;
+mysql> use mayank;
+Database changed
+mysql> create table student(
+    -> RollNo int,
+    -> FirstName varchar(50),
+    -> LastName varchar(50),
+    -> Marks int,
+    -> City varchar(50)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_mayank |
++------------------+
+| student          |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> insert into student(RollNo, FirstName, LastName, Marks, City)
+    -> values(101, 'Mayank', 'Kathane', 68, 'Bhandara');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student(RollNo, FirstName, LastName, Marks, City)
+    -> values(102, 'Nikhil', 'Nerker', 88, 'Nasik');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student(RollNo, FirstName, LastName, Marks, City)
+    -> values(103, 'Harry', 'Kshirsagar', 78, 'Singapore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++--------+-----------+------------+-------+-----------+
+| RollNo | FirstName | LastName   | Marks | City      |
++--------+-----------+------------+-------+-----------+
+|    101 | Mayank    | Kathane    |    68 | Bhandara  |
+|    102 | Nikhil    | Nerker     |    88 | Nasik     |
+|    103 | Harry     | Kshirsagar |    78 | Singapore |
++--------+-----------+------------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update student
+    -> set Marks = 100
+    -> where RollNo = 101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++--------+-----------+------------+-------+-----------+
+| RollNo | FirstName | LastName   | Marks | City      |
++--------+-----------+------------+-------+-----------+
+|    101 | Mayank    | Kathane    |   100 | Bhandara  |
+|    102 | Nikhil    | Nerker     |    88 | Nasik     |
+|    103 | Harry     | Kshirsagar |    78 | Singapore |
++--------+-----------+------------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select RollNo from student;
++--------+
+| RollNo |
++--------+
+|    101 |
+|    102 |
+|    103 |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select RollNo,Marks from student;
++--------+-------+
+| RollNo | Marks |
++--------+-------+
+|    101 |   100 |
+|    102 |    88 |
+|    103 |    78 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select RollNo,Marks,City from student;
++--------+-------+-----------+
+| RollNo | Marks | City      |
++--------+-------+-----------+
+|    101 |   100 | Bhandara  |
+|    102 |    88 | Nasik     |
+|    103 |    78 | Singapore |
++--------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student;
++--------+-----------+------------+-------+-----------+
+| RollNo | FirstName | LastName   | Marks | City      |
++--------+-----------+------------+-------+-----------+
+|    101 | Mayank    | Kathane    |   100 | Bhandara  |
+|    102 | Nikhil    | Nerker     |    88 | Nasik     |
+|    103 | Harry     | Kshirsagar |    78 | Singapore |
++--------+-----------+------------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select Marks from student
+    -> where Marks < 100;
++-------+
+| Marks |
++-------+
+|    88 |
+|    78 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select FirstName,Marks from student
+    -> where Marks < 100;
++-----------+-------+
+| FirstName | Marks |
++-----------+-------+
+| Nikhil    |    88 |
+| Harry     |    78 |
++-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select Marks from student
+    -> select Marks from student
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select Marks from student' at line 2
+mysql> select FirstName,Marks from student
+    -> where Marks <= 100;
++-----------+-------+
+| FirstName | Marks |
++-----------+-------+
+| Mayank    |   100 |
+| Nikhil    |    88 |
+| Harry     |    78 |
++-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select all from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student' at line 1
+mysql> select FirstName from student
+    -> where FirstName == 'Mayank';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== 'Mayank'' at line 2
+mysql> select FirstName from student
+    -> where FirstName = 'Mayank';
++-----------+
+| FirstName |
++-----------+
+| Mayank    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student limit 2;
++--------+-----------+----------+-------+----------+
+| RollNo | FirstName | LastName | Marks | City     |
++--------+-----------+----------+-------+----------+
+|    101 | Mayank    | Kathane  |   100 | Bhandara |
+|    102 | Nikhil    | Nerker   |    88 | Nasik    |
++--------+-----------+----------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student limit 1;
++--------+-----------+----------+-------+----------+
+| RollNo | FirstName | LastName | Marks | City     |
++--------+-----------+----------+-------+----------+
+|    101 | Mayank    | Kathane  |   100 | Bhandara |
++--------+-----------+----------+-------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student limit 3;
++--------+-----------+------------+-------+-----------+
+| RollNo | FirstName | LastName   | Marks | City      |
++--------+-----------+------------+-------+-----------+
+|    101 | Mayank    | Kathane    |   100 | Bhandara  |
+|    102 | Nikhil    | Nerker     |    88 | Nasik     |
+|    103 | Harry     | Kshirsagar |    78 | Singapore |
++--------+-----------+------------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> mysqldump -u username -p mayank > filename.sql
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysqldump -u username -p mayank > filename.sql' at line 1
+mysql>              
