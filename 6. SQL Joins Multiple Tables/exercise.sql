@@ -11,4 +11,4 @@ FROM movies m
 LEFT JOIN languages l ON m.language_id = l.language_id
 LEFT JOIN financials f ON m.movie_id = f.movie_id
 WHERE l.name = 'Hindi'
-ORDER BY revenue_in_millions DESC
+ORDER BY revenue_in_millions DESC 
